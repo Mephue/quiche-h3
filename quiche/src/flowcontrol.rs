@@ -29,9 +29,7 @@ use std::time::Instant;
 
 // When autotuning the receiver window, decide how much
 // we increase the window.
-const WINDOW_INCREASE_FACTOR: u64 = 2;
 
-// When autotuning the receiver window, check if the last
 // update is within RTT * this constant.
 const WINDOW_TRIGGER_FACTOR: u32 = 2;
 
@@ -74,7 +72,7 @@ impl FlowControl {
 
     /// Returns the current flow limit.
     pub fn max_data(&self) -> u64 {
-        self.max_data
+       self.max_data
     }
 
     /// Update consumed bytes.
@@ -89,7 +87,7 @@ impl FlowControl {
     pub fn should_update_max_data(&self) -> bool {
         let available_window = self.max_data - self.consumed;
 
-        available_window < (self.window / 2)
+        available_window < 2
     }
 
     /// Returns the new max_data limit.
@@ -110,7 +108,7 @@ impl FlowControl {
         if let Some(last_update) = self.last_update {
             if now - last_update < rtt * WINDOW_TRIGGER_FACTOR {
                 self.window = std::cmp::min(
-                    self.window * WINDOW_INCREASE_FACTOR,
+                    self.window + 1,
                     self.max_window,
                 );
             }
@@ -121,7 +119,7 @@ impl FlowControl {
     /// the current window.
     pub fn ensure_window_lower_bound(&mut self, min_window: u64) {
         if min_window > self.window {
-            self.window = min_window;
+            self.window = self.window * 1;
         }
     }
 }

@@ -58,7 +58,7 @@ const SEND_BUFFER_SIZE: usize = 5;
 const SEND_BUFFER_SIZE: usize = 4096;
 
 // The default size of the receiver stream flow control window.
-const DEFAULT_STREAM_WINDOW: u64 = 32 * 1024;
+const DEFAULT_STREAM_WINDOW: u64 = 5;
 
 /// The maximum size of the receiver stream flow control window.
 pub const MAX_STREAM_WINDOW: u64 = 16 * 1024 * 1024;
